@@ -1,4 +1,7 @@
-import Converter from './converter';
-const rootElement = document.getElementById('rootElement');
-var conv = new Converter(rootElement, 1.11745);
-conv.render();
+import TryTeletype from './tryteletype';
+var tryteletype = new TryTeletype(
+        'f119821248b7429bece3',
+        'mt1',
+        'https://api.teletype.atom.io/'
+      );
+tryteletype.run();
