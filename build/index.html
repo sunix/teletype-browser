@@ -5,6 +5,39 @@
   <body>
     <div id="rootElement"></div>
     hellosssss
-    <script src="bundle.js"></script>
+    <script src="cheteletype.js"></script>
+        <script>
+        window.onload = async function () {
+            
+            
+            var tryteletype = new CheTeletype({
+              pusherKey: 'f119821248b7429bece3',
+              pusherOptions: {
+                cluster: 'mt1',
+              },
+              baseURL: 'https://api.teletype.atom.io/'
+            })
+            teletypeClient = tryteletype.createClient();
+
+        teletypeClient.signIn('e9214ff98e2544af8eefb6bdff7e2fb584c72cd5')
+        teletypeClient.initialize()
+        const guestPortalDelegate = CheTeletype.createPortalBinding()
+        const guestPortal =  await teletypeClient.joinPortal('eb5660d2-edbc-4f74-9cc1-924caf227124');
+        guestPortal.setDelegate(guestPortalDelegate)
+        console.log("activebufferproxyuri : " + guestPortalDelegate.getTetherBufferProxyURI())
+
+        const guestEditorProxy = guestPortalDelegate.getTetherEditorProxy()
+
+        const guestBufferProxy = guestEditorProxy.bufferProxy
+
+        const guestBufferDelegate = CheTeletype.createBufferBinding()
+        guestBufferProxy.setDelegate(guestBufferDelegate)
+
+        guestBufferProxy.setTextInRange(...guestBufferDelegate.insert({row: 0, column: 0},'hello from a browser\n'))
+        guestBufferProxy.setTextInRange({row:0,column:0},{row: 0, column: 0}, "test");
+
+        //tryteletype.connect('e9214ff98e2544af8eefb6bdff7e2fb584c72cd5', 'e642dd80-cc7c-4c8f-9a50-5f4308e252aa');
+        };
+</script>
   </body>
 </html>

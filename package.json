@@ -18,6 +18,8 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "@atom/teletype-client": "^0.28.2"
+    "@atom/teletype-client": "^0.34.0",
+    "url": "^0.11.0",
+    "url-parse": "^1.2.0"
   }
 }
