@@ -43,7 +43,11 @@ class FakePortalDelegate {
       this.onAddEditorProxy(editorProxy)
     }
     console.log("addEditorProxy: " + editorProxy.bufferProxy.uri);
-    assert(!this.editorProxies.has(editorProxy), 'Cannot add the same editor proxy multiple times')
+    if(!this.editorProxies.has(editorProxy)){        
+        console.log('Cannot add the same editor proxy multiple times remove/add again');
+        this.editorProxies.delete(editorProxy);
+    }
+
     this.editorProxies.add(editorProxy)
   }
 
@@ -80,6 +84,7 @@ class FakePortalDelegate {
       this.onUpdateTether(state, editorProxy, position)
     }
     console.log("updateTether: " + editorProxy.bufferProxy.uri);
+    this.addEditorProxy (editorProxy);
     this.tetherState = state
     if (editorProxy != this.tetherEditorProxy) {
       this.tetherEditorProxy = editorProxy
@@ -113,4 +118,6 @@ class FakePortalDelegate {
   siteDidLeave (siteId) {
     this.leaveEvents.push(siteId)
   }
+  
+  didChangeEditorProxies () {}
 }
